@@ -1,0 +1,6 @@
+{
+  "name": "Découpeur de Planche de Photos IA",
+  "description": "Une application alimentée par l'IA pour détecter, découper et télécharger individuellement les photos présentes sur une planche ou un scan.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
