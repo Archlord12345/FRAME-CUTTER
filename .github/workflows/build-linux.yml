@@ -1,0 +1,32 @@
+name: Build Linux
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+      - name: Install dependencies
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y libgtk-3-dev libblkid-dev liblzma-dev libgcrypt20-dev pkg-config clang cmake ninja-build
+          cd flutter_version
+          flutter pub get
+      - name: Build Linux
+        run: |
+          cd flutter_version
+          flutter build linux
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: linux-build
+          path: flutter_version/build/linux/x64/release/bundle
